@@ -1,26 +1,15 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: myapp-pod
-spec:
-  containers:
-  - name: myapp-container
-    image: your-image:latest
-    command: ["echo", "Hello, Kubernetes!"]
-  restartPolicy: OnFailure
----
-apiVersion: batch/v1
+apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: my-cronjob
 spec:
-  schedule: "*/1 * * * *"
+  schedule: "*/1 * * * *" # Runs every minute
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: my-cronjob-container
-            image: your-cronjob-image:latest
-            command: ["echo", "CronJob executed"]
+            image: my-image:latest
+            # Add command or args if necessary
           restartPolicy: OnFailure
